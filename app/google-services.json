@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "216468380689",
+    "firebase_url": "https://mychat-471a0.firebaseio.com",
+    "project_id": "mychat-471a0",
+    "storage_bucket": "mychat-471a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216468380689:android:4365b54d378e60e2",
+        "android_client_info": {
+          "package_name": "com.example.sonyvaio.MyChat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216468380689-86g79hdc7mkp222gd4ud9smvg6rkeqan.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sonyvaio.MyChat",
+            "certificate_hash": "F7C6D983D0D88B4716D951548752E07943AB8191"
+          }
+        },
+        {
+          "client_id": "216468380689-v26rovivh1pck92pacg6gifu1v99fbqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXVyyZwMHcoasx-vxsg8lbUOjSDNQBiPQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216468380689-v26rovivh1pck92pacg6gifu1v99fbqe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
