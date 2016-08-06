@@ -7,20 +7,36 @@
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context="com.example.sonyvaio.MyChat.MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/message_container">
 
     </android.support.v7.widget.RecyclerView>
-
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:hint="Chat with your friend"
-        android:drawableRight="@drawable/ic_send"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:id="@+id/edit_text" />
+      >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:hint="Chat with your friend"
+            android:layout_weight="2"
+            android:id="@+id/message_box" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_send"
+            android:id="@+id/btn_send"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:visibility="visible"/>
+    </LinearLayout>
+
 </RelativeLayout>

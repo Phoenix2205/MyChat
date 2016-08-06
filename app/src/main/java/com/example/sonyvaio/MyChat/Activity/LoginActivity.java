@@ -1,4 +1,4 @@
-package com.example.sonyvaio.MyChat;
+package com.example.sonyvaio.MyChat.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.sonyvaio.MyChat.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -14,6 +15,7 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -23,9 +25,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     CallbackManager callbackManager;
-    String TAG="LOGIN ACTIVITY";
+    String TAG = "LOGIN ACTIVITY";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +58,17 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //will be automatic trigger when handle facebook login is successful
-        mAuthListener= new FirebaseAuth.AuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    Intent intent= new Intent(LoginActivity.this ,MainActivity.class);
+                    //  ((GlobalApplication)LoginActivity.this.getApplication()).setUser(user);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+
 
                 } else {
                     // User is signed out
@@ -82,7 +88,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-
+//                        Intent intent= new Intent(LoginActivity.this ,MainActivity.class);
+//                        startActivity(intent);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
@@ -93,8 +100,15 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                     }
-                });
+
+                }).addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, e.getMessage());
+            }
+        });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -107,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
+
     @Override
     public void onStop() {
         super.onStop();
@@ -115,4 +130,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-}
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mAuth.getCurrentUser() != null) {
+                Log.d("Token",String.valueOf(mAuth.getCurrentUser().getDisplayName()));
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);// Local method to handle camera init
+            }
+        }
+    }
+
+
